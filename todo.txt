@@ -1,0 +1,17 @@
+nastudovat si formát princeton wordnetu
+nastudovat si formát arabského wordnetu
+udělat xsd schema arabského wordnetu
+nastudovat si formát DEBVisDic XML
+napsat parser pro sk-lit wordnet -taky nějak ošetřit, že vstup je validní a při vyhazování výjimek by to chtělo uživateli říct, na kterém řádku a v které části toho řádku má nevalidní formát
+napsat tranformaci pro arabsky wordnet
+napsat aplikaci (GUI?) -požádá o vstupní data, zkontroluje validitu formátu vstupních dat a pokud je ten formát validní, tak vygenerujeme výstupní soubor v DEBVisDic XML formátu -do 11. 5. by měl být hotový návrh a dokumentace
+každý udělá závěrečnou zprávu o svém podílu na řešení projektu v rozsahu 1 stránky -formát docBook (???)
+
+Jan:
+slovensko-litevská část 1, 4, 5
+
+Ondřej:
+arabská část 2, 3, 4, 6
+
+nepřiděleno:
+aplikace 7
