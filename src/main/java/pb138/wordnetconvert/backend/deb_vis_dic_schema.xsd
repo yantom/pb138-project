@@ -3,7 +3,7 @@
   <xs:element name="WN">
     <xs:complexType>
       <xs:sequence>
-
+         
         <xs:element name="SYNSET" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
@@ -19,7 +19,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              
+
               <xs:element name="SYNONYM">
                 <xs:complexType>
                   <xs:choice maxOccurs="unbounded">
@@ -81,7 +81,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              
+                  
               <xs:element name="DOMAIN" type="xs:string" minOccurs="0"/> <!--synset domain-->
 
               <xs:element name="SUMO" minOccurs="0" maxOccurs="unbounded"> <!--SUMO ontology link-->
@@ -93,7 +93,7 @@
                   </xs:simpleContent>
                 </xs:complexType>
               </xs:element>
-
+              
               <xs:element name="SNOTE" type="xs:string" minOccurs="0"/> <!--synset note-->
 
               <xs:element name="STAMP" type="xs:string" minOccurs="0"/> <!--identify last user who edited the synset -->
