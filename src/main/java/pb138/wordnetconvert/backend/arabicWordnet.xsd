@@ -11,21 +11,21 @@ and open the template in the editor.
     
     <xs:element name="wordnet">
 	<xs:complexType>
-	    <xs:all minOccurs="0" maxOccurs="unbouded">
-		<xs:element name="item">
+	    <xs:sequence>
+		<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
 		    <xs:complexType>
 			<xs:attribute name="itemid" type="xs:string" use="required"/>
 			<xs:attribute name="type" type="xs:string" use="required"/>
 			<xs:attribute name="POS" type="xs:string" use="required"/>
 		    </xs:complexType>
 		</xs:element>
-		<xs:element name="word">
+		<xs:element name="word" minOccurs="0" maxOccurs="unbounded">
 		    <xs:complexType>
 			<xs:attribute name="value" type="xs:string" use="required"/>
 			<xs:attribute name="synsetid" type="xs:string" use="required"/>
 		    </xs:complexType>
 		</xs:element>
-	    </xs:all>
+	    </xs:sequence>
 	    <xs:attribute name="version" type="xs:integer"/>
 	</xs:complexType>
     </xs:element>

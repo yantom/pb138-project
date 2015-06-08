@@ -65,7 +65,7 @@ public class SchemaValidator {
     public SchemaValidator(String schemaName){
         try {
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = sf.newSchema(new File("company.xsd"));
+            Schema schema = sf.newSchema(new File(schemaName));
             
             DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
             dbf.setNamespaceAware(true);
