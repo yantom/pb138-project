@@ -21,7 +21,18 @@ and open the template in the editor.
 			    <xs:attribute name="name" type="xs:string" use="optional"/>
 			    <xs:attribute name="type" type="xs:string" use="required"/>
 			    <xs:attribute name="headword" type="xs:string" use="optional"/>
-			    <xs:attribute name="POS" type="xs:string" use="required"/>
+			    <xs:attribute name="POS" use="required">
+				<xs:simpleType>
+				    <xs:restriction base="xs:string">
+					<xs:enumeration value="a"/>
+					<xs:enumeration value="b"/>
+					<xs:enumeration value="n"/>
+					<xs:enumeration value="v"/>
+<!--					<xs:enumeration value="s"/>
+					<xs:enumeration value="r"/>-->
+				    </xs:restriction>
+				</xs:simpleType>
+			    </xs:attribute>
 			    <xs:attribute name="source" type="xs:string" use="optional"/>
 			    <xs:attribute name="gloss" type="xs:string" use="optional"/>
 			    <xs:attribute name="authorshipid" type="xs:string" use="optional"/>
