@@ -28,8 +28,8 @@ and open the template in the editor.
 					<xs:enumeration value="b"/>
 					<xs:enumeration value="n"/>
 					<xs:enumeration value="v"/>
-<!--					<xs:enumeration value="s"/>
-					<xs:enumeration value="r"/>-->
+					<xs:enumeration value="s"/>
+					<xs:enumeration value="r"/>
 				    </xs:restriction>
 				</xs:simpleType>
 			    </xs:attribute>

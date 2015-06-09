@@ -10,5 +10,5 @@ package pb138.wordnetconvert.backend;
  * @author Honzator
  */
 public enum Pos {
-    a,n,v,r
+    a,n,v,b
 }
