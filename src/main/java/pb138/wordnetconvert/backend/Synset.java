@@ -24,7 +24,7 @@ public class Synset {
     private char pos;
     @XmlElement(name = "SYNONYM")
     private Synonym synonym = new Synonym();
-    @XmlTransient
+    @XmlElement(name = "ILR")
     private Set<InternalLink> internalLinks = new HashSet<>();
     @XmlElement(name = "DEF")
     private String def;
