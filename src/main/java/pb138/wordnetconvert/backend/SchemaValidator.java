@@ -81,13 +81,8 @@ public class SchemaValidator {
         }
     }
     
-    public Boolean validate(String xmlFilename) throws IOException{
-        try {
-            Document doc = docBuilder.parse(new File(xmlFilename));
-        } catch (SAXException ex) {
-            //Logger.getAnonymousLogger(SchemaValidator.class.getName()).log(Level.INFO,ex.getMessage());
-            return false;
-        } 
+    public Boolean validate(String xmlFilename) throws IOException, SAXException {
+        Document doc = docBuilder.parse(new File(xmlFilename));
         return true;
     }
 }
