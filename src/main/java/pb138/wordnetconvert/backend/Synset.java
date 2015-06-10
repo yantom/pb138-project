@@ -21,26 +21,26 @@ public class Synset {
     @XmlElement(name = "ID")
     private String id;
     @XmlElement(name = "POS")
-    private char pos;
+    private String pos;
     @XmlElement(name = "SYNONYM")
     private Synonym synonym = new Synonym();
     @XmlElement(name = "ILR")
     private Set<InternalLink> internalLinks = new HashSet<>();
     @XmlElement(name = "DEF")
     private String def;
-    public Synset(String id, char pos, String def) throws WordnetException{
+    public Synset(String id, String pos, String def) throws WordnetException{
         this.id = id;
         switch(pos){
-            case 'r':
-                this.pos = 'b';
+            case "r":
+                this.pos = "b";
                 break;
-            case 's':
-                this.pos = 'a';
+            case "s":
+                this.pos = "a";
                 break;
-            case 'b':
-            case 'a':
-            case 'n':
-            case 'v':
+            case "b":
+            case "a":
+            case "n":
+            case "v":
                 this.pos = pos;
                 break;
             default: throw new WordnetException("unknown pos");
@@ -54,7 +54,7 @@ public class Synset {
         return id;
     }
 
-    public char getPos() {
+    public String getPos() {
         return pos;
     }
 
