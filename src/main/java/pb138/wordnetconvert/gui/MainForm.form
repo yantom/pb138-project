@@ -65,7 +65,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -172,6 +172,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField2">
     </Component>
@@ -180,12 +183,18 @@
         <Property name="text" type="java.lang.String" value="-&gt;"/>
         <Property name="name" type="java.lang.String" value="InputFileButton" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-&gt;"/>
         <Property name="name" type="java.lang.String" value="OutputFileButton" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="ArabicRadioButton">
       <Properties>
@@ -215,6 +224,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Convert"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton3MouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

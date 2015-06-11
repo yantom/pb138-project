@@ -5,6 +5,12 @@
  */
 package pb138.wordnetconvert.gui;
 
+import java.io.FileFilter;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import pb138.wordnetconvert.backend.ArabicWordnetConverterImpl;
+import pb138.wordnetconvert.backend.WordnetConverter;
+
 /**
  *
  * @author Honzator
@@ -91,11 +97,23 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel3.setText("Output file:");
 
+        jTextField1.setName(""); // NOI18N
+
         jButton1.setText("->");
         jButton1.setName("InputFileButton"); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("->");
         jButton2.setName("OutputFileButton"); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(ArabicRadioButton);
         ArabicRadioButton.setText("Arabic");
@@ -107,6 +125,11 @@ public class MainForm extends javax.swing.JFrame {
         SlovakRadioButton.setText("Slovak");
 
         jButton3.setText("Convert");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,7 +191,54 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        if(buttonGroup1.getSelection() == null) {
+	    JOptionPane.showMessageDialog(null, "You have to choose the language of source wordnet.", "Cannot convert", JOptionPane.ERROR_MESSAGE);
+	    return;
+	}
+	if(jTextField1.getText().isEmpty()) {
+	    JOptionPane.showMessageDialog(null, "You have to choose the input file.", "Cannot convert", JOptionPane.ERROR_MESSAGE);
+	    return;
+	}
+	if(jTextField2.getText().isEmpty()) {
+	    JOptionPane.showMessageDialog(null, "You have to choose the output file.", "Cannot convert", JOptionPane.ERROR_MESSAGE);
+	    return;
+	}
+	WordnetConverter converter = null;
+	if(ArabicRadioButton.isSelected()) {
+	    converter = new ArabicWordnetConverterImpl();
+	}
+	else if(LithuaninanRadioButton.isSelected()) {
+	    //TODO
+	}
+	else if(SlovakRadioButton.isSelected()) {
+	    //TODO
+	}
+	try {
+	    converter.convert(jTextField1.getText(), jTextField2.getText());
+	    JOptionPane.showMessageDialog(null, "The source file was succesfuly converted.", "Convert succesful", JOptionPane.INFORMATION_MESSAGE);
+	}
+	catch(Exception ex) {
+	    JOptionPane.showMessageDialog(null, ex.getMessage(), "Convert error", JOptionPane.ERROR_MESSAGE);
+	}
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+	final JFileChooser fc = new JFileChooser();
+	if(fc.showOpenDialog(jLabel1) == JFileChooser.APPROVE_OPTION) {
+	    jTextField1.setText(fc.getSelectedFile().getPath());
+	}
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        final JFileChooser fc = new JFileChooser();
+	if(fc.showSaveDialog(jLabel1) == JFileChooser.APPROVE_OPTION) {
+	    jTextField2.setText(fc.getSelectedFile().getPath());
+	}
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
