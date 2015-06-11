@@ -15,7 +15,8 @@ import pb138.wordnetconvert.WordnetException;
  * @author Ondra
  */
 public class ArabicWordnetConverterImpl implements WordnetConverter {
-    public void convert(String sourcePath, String destinationPath) throws IOException, WordnetException {
+    @Override
+    public void convert(String sourcePath, String destinationPath) throws WordnetException {
 	SchemaValidator validator = new SchemaValidator("arabicWordnet.xsd");
 	try {
 	    validator.validate(sourcePath);
@@ -23,6 +24,9 @@ public class ArabicWordnetConverterImpl implements WordnetConverter {
 	catch(SAXException ex) {
 	    throw new WordnetException(ex.getMessage());
 	}
+        catch(IOException ex){
+            throw new WordnetException(ex.getMessage());
+        }
 	File source = new File(sourcePath);
 	source.renameTo(new File("in"));
 	//TODO execute XQuery
