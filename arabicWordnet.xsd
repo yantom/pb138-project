@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+	   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	   elementFormDefault="qualified">
+    
+    <xs:element name="wordnet">
+	<xs:complexType>
+	    <xs:sequence maxOccurs="unbounded">
+		<xs:choice>
+		    <xs:element name="item">
+			<xs:complexType>
+			    <xs:attribute name="itemid" type="xs:string" use="required"/>
+			    <xs:attribute name="offset" type="xs:string" use="optional"/>
+			    <xs:attribute name="lexfile" type="xs:string" use="optional"/>
+			    <xs:attribute name="name" type="xs:string" use="optional"/>
+			    <xs:attribute name="type" type="xs:string" use="required"/>
+			    <xs:attribute name="headword" type="xs:string" use="optional"/>
+			    <xs:attribute name="POS" use="required">
+				<xs:simpleType>
+				    <xs:restriction base="xs:string">
+					<xs:enumeration value="a"/>
+					<xs:enumeration value="b"/>
+					<xs:enumeration value="n"/>
+					<xs:enumeration value="v"/>
+					<xs:enumeration value="s"/>
+					<xs:enumeration value="r"/>
+				    </xs:restriction>
+				</xs:simpleType>
+			    </xs:attribute>
+			    <xs:attribute name="source" type="xs:string" use="optional"/>
+			    <xs:attribute name="gloss" type="xs:string" use="optional"/>
+			    <xs:attribute name="authorshipid" type="xs:string" use="optional"/>
+			</xs:complexType>
+		    </xs:element>
+		    <xs:element name="authorship"/>
+		    <xs:element name="word">
+			<xs:complexType>
+			    <xs:attribute name="wordid" type="xs:string" use="optional"/>
+			    <xs:attribute name="value" type="xs:string" use="required"/>
+			    <xs:attribute name="synsetid" type="xs:string" use="required"/>
+			    <xs:attribute name="frequency" type="xs:string" use="optional"/>
+			    <xs:attribute name="corpus" type="xs:string" use="optional"/>
+			    <xs:attribute name="authorshipid" type="xs:string" use="optional"/>
+			</xs:complexType>
+		    </xs:element>
+		    <xs:element name="form"/>
+		    <xs:element name="link"/>
+		</xs:choice>
+	    </xs:sequence>
+	    <xs:attribute name="version" type="xs:integer"/>
+	</xs:complexType>
+    </xs:element>
+
+</xs:schema>
