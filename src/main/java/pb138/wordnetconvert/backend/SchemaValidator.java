@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pb138.wordnetconvert.backend;
 
 import java.io.File;
@@ -25,7 +19,8 @@ import org.xml.sax.SAXParseException;
 
 /**
  *
- * @author bar
+ * @author Ondřej Bulla, uco: 422296
+ * @version 11.6.2015
  */
 public class SchemaValidator {
     class ValidationErrorsHandler implements ErrorHandler{

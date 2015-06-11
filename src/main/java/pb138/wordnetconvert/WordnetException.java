@@ -7,8 +7,9 @@ package pb138.wordnetconvert;
 
 
 /**
- *
- * @author Honzator
+ * exception which is thrown if anything goes wrong
+ * @author Jan Tomášek, uco: 422677
+ * @version 11.6.2015
  */
 public class WordnetException extends Exception{
 

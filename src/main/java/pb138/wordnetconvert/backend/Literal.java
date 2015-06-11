@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pb138.wordnetconvert.backend;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
- *
- * @author Honzator
+ * class for LITERAL element of DEBVisDic format XML
+ * @author Jan Tomášek, uco: 422677
+ * @version 11.6.2015
  */
 @XmlRootElement(name = "LITERAL")
 public class Literal {

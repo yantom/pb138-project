@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pb138.wordnetconvert.backend;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
- *
- * @author Honzator
+ * class for ILR element of DEBVisDic format XML
+ * @author Jan Tomášek, uco: 422677
+ * @version 11.6.2015
  */
+
 @XmlRootElement(name = "ILR")
 public class InternalLink {
     @XmlValue
@@ -21,6 +17,13 @@ public class InternalLink {
     @XmlAttribute
     private String type;
 
+    public InternalLink(String id, String type){
+        this.id = id;
+        this.type = type;
+    }
+    
+    public InternalLink(){}
+    
     public String getId() {
         return id;
     }

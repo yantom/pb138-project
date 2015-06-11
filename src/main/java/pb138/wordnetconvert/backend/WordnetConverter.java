@@ -1,16 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pb138.wordnetconvert.backend;
 
-import java.io.IOException;
+import pb138.wordnetconvert.WordnetException;
 
 /**
- *
- * @author Honzator
+ * interface for Wordnet converters
+ * @author Jan Tomášek, uco: 422677
+ * @author Ondřej Bulla, uco: 422296
+ * @version 11.6.2015
  */
 public interface WordnetConverter {
-    void convert(String sourcePath, String destinationPath) throws IOException;
+    /**
+     * This method converts Wordnet at sourcePath to DEBVisDic format and stores it at destinationPath.
+     * @param sourcePath
+     * @param destinationPath
+     * @throws WordnetException throws exception if anything goes wrong, in this case no data will be stored
+     */
+    void convert(String sourcePath, String destinationPath) throws WordnetException;
 }

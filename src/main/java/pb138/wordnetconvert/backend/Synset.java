@@ -1,20 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pb138.wordnetconvert.backend;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import pb138.wordnetconvert.WordnetException;
 
 
 /**
- *
- * @author Honzator
+ * class for SYNSET element of DEBVisDic format XML
+ * @author Jan Tomášek, uco: 422677
+ * @version 11.6.2015
  */
 @XmlRootElement(name = "SYNSET")
 public class Synset {
@@ -28,6 +24,14 @@ public class Synset {
     private Set<InternalLink> internalLinks = new HashSet<>();
     @XmlElement(name = "DEF")
     private String def;
+    
+    /**
+     * constructor of Synset class
+     * @param id    id of synset
+     * @param pos   part of speech- some Wordnets uses different names- these are converted
+     * @param def   definition of synset
+     * @throws WordnetException throws exception if pos is unknown
+     */
     public Synset(String id, String pos, String def) throws WordnetException{
         this.id = id;
         switch(pos){
@@ -69,4 +73,28 @@ public class Synset {
     public String getDef() {
         return def;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Synset other = (Synset) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
