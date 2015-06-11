@@ -6,11 +6,12 @@
 package pb138.wordnetconvert.backend;
 
 import java.io.IOException;
+import org.xml.sax.SAXException;
 
 /**
  *
  * @author Honzator
  */
 public interface WordnetConverter {
-    void convert(String sourcePath, String destinationPath) throws IOException;
+    void convert(String sourcePath, String destinationPath) throws IOException, SAXException;
 }
