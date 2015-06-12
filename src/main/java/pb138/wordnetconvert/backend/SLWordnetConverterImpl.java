@@ -141,6 +141,18 @@ public class SLWordnetConverterImpl implements WordnetConverter{
                 return  "Similar to";
             case "<":
                 return  "Participle of verb";
+            case ";c":
+                return  "Domain of synset - TOPIC";
+            case "-c":
+                return  "Member of this domain - TOPIC";
+            case ";r":
+                return  "Domain of synset - REGION";
+            case "-r":
+                return  " Member of this domain - REGION";
+            case ";u":
+                return  "Domain of synset - USAGE";
+            case "-u":
+                return  "Participle of verb";
             case "\\":
                 if(pos.equals("b"))
                     return  "Derived from adjective";

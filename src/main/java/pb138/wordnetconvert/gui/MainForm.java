@@ -60,7 +60,9 @@ public class MainForm extends javax.swing.JFrame {
                 if(get())
                     JOptionPane.showMessageDialog(null, "The source file was succesfuly converted.", "Convert succesful", JOptionPane.INFORMATION_MESSAGE);
             }
-            catch(Exception ex){}
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Convert error", JOptionPane.ERROR_MESSAGE);
+            }
         }
             
     }
