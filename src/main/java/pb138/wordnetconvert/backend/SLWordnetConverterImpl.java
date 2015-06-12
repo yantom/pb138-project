@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -143,16 +144,10 @@ public class SLWordnetConverterImpl implements WordnetConverter{
                 return  "Participle of verb";
             case ";c":
                 return  "Domain of synset - TOPIC";
-            case "-c":
-                return  "Member of this domain - TOPIC";
             case ";r":
                 return  "Domain of synset - REGION";
-            case "-r":
-                return  " Member of this domain - REGION";
             case ";u":
                 return  "Domain of synset - USAGE";
-            case "-u":
-                return  "Participle of verb";
             case "\\":
                 if(pos.equals("b"))
                     return  "Derived from adjective";
@@ -217,12 +212,14 @@ public class SLWordnetConverterImpl implements WordnetConverter{
         Synset synset;
         
         File destFile=new File(destinationPath);
-        File logFile=new File(destinationPath.substring(0, destinationPath.lastIndexOf(File.pathSeparator)+1) + language.toString() + "wordnet_invalid_pointers_log.txt");
-     
+        File logFile=new File(destinationPath.substring(0, destinationPath.lastIndexOf(File.separator)+1) + language.toString() + "wordnet_invalid_pointers_log.txt");
+        
         try(BufferedReader br =  new BufferedReader(new InputStreamReader(new FileInputStream(sourcePath), "UTF-8"));
                 Writer wordnetWriter= new OutputStreamWriter(new FileOutputStream(destFile), "UTF-8");
                 BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFile))){
         
+            logWriter.write("missing_synset_id,'pointed_as',from_synset_with_id");
+            logWriter.newLine();
         String line = br.readLine();
         while(line != null){
             if(line.isEmpty()){
@@ -282,7 +279,7 @@ public class SLWordnetConverterImpl implements WordnetConverter{
                 if(pointerDescription == null)
                     continue;
                 if(!synsetIDset.contains(pointerMatcher.group(2))){
-                    logWriter.write("missing synset with id: " + pointerMatcher.group(2) + " pointed as: '" + pointerDescription + "' from synset with id: " + synset.getId());
+                    logWriter.write(pointerMatcher.group(2) + ",'" + pointerDescription + "'," + synset.getId());
                     logWriter.newLine();
                     continue;
                 }
