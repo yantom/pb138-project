@@ -8,20 +8,61 @@ package pb138.wordnetconvert.gui;
 import java.io.FileFilter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import pb138.wordnetconvert.backend.ArabicWordnetConverterImpl;
+import pb138.wordnetconvert.backend.Lang;
+import pb138.wordnetconvert.backend.SLWordnetConverterImpl;
 import pb138.wordnetconvert.backend.WordnetConverter;
 
 /**
- *
- * @author Honzator
+ * Main GUI form
+* @author Jan Tomášek, uco: 422677
+ * @author Ondřej Bulla, uco: 422296
+ * @version 12.6.2015
  */
 public class MainForm extends javax.swing.JFrame {
 
+    private WordnetConverter converter = null;
     /**
      * Creates new form MainForm
      */
     public MainForm() {
         initComponents();
+    }
+    
+    private class ConvertSwingWorker extends SwingWorker<Boolean, Void> {
+
+        private String sourceFile;
+        private String destFile;
+
+        public ConvertSwingWorker(String sourceFile, String destFile) {
+            this.destFile = destFile;
+            this.sourceFile = sourceFile;
+        }
+
+        @Override
+        protected Boolean doInBackground() {
+            try{
+            converter.convert(sourceFile, destFile);}
+            catch(Exception ex) {
+                jProgressBar1.setIndeterminate(false);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Convert error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            return true;
+        }
+        
+
+        protected void done() {
+            jProgressBar1.setIndeterminate(false);
+            try{
+                if(get())
+                    JOptionPane.showMessageDialog(null, "The source file was succesfuly converted.", "Convert succesful", JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch(Exception ex){}
+        }
+            
     }
 
     /**
@@ -52,6 +93,7 @@ public class MainForm extends javax.swing.JFrame {
         LithuaninanRadioButton = new javax.swing.JRadioButton();
         SlovakRadioButton = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -130,6 +172,11 @@ public class MainForm extends javax.swing.JFrame {
                 jButton3MouseClicked(evt);
             }
         });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,6 +213,9 @@ public class MainForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,6 +237,8 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(LithuaninanRadioButton)
                     .addComponent(SlovakRadioButton)
                     .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -207,23 +259,20 @@ public class MainForm extends javax.swing.JFrame {
 	    JOptionPane.showMessageDialog(null, "You have to choose the output file.", "Cannot convert", JOptionPane.ERROR_MESSAGE);
 	    return;
 	}
-	WordnetConverter converter = null;
+	
 	if(ArabicRadioButton.isSelected()) {
 	    converter = new ArabicWordnetConverterImpl();
 	}
 	else if(LithuaninanRadioButton.isSelected()) {
-	    //TODO
+	    converter = new SLWordnetConverterImpl(Lang.LT);
 	}
 	else if(SlovakRadioButton.isSelected()) {
-	    //TODO
+	    converter = new SLWordnetConverterImpl(Lang.SK);
 	}
-	try {
-	    converter.convert(jTextField1.getText(), jTextField2.getText());
-	    JOptionPane.showMessageDialog(null, "The source file was succesfuly converted.", "Convert succesful", JOptionPane.INFORMATION_MESSAGE);
-	}
-	catch(Exception ex) {
-	    JOptionPane.showMessageDialog(null, ex.getMessage(), "Convert error", JOptionPane.ERROR_MESSAGE);
-	}
+        ConvertSwingWorker csw = new ConvertSwingWorker(jTextField1.getText(), jTextField2.getText());
+        jProgressBar1.setIndeterminate(true);
+	csw.execute();  
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -240,41 +289,45 @@ public class MainForm extends javax.swing.JFrame {
 	}
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new MainForm().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainForm().setVisible(true);
+            }
+        });
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -295,6 +348,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
