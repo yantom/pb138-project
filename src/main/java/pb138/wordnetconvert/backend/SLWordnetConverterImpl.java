@@ -212,7 +212,7 @@ public class SLWordnetConverterImpl implements WordnetConverter{
         Synset synset;
         
         File destFile=new File(destinationPath);
-        File logFile=new File(destinationPath.substring(0, destinationPath.lastIndexOf(File.separator)+1) + language.toString() + "wordnet_invalid_pointers_log.txt");
+        File logFile=new File(destinationPath.substring(0, destinationPath.lastIndexOf('.')) + "_invalid_pointers_log.txt");
         
         try(BufferedReader br =  new BufferedReader(new InputStreamReader(new FileInputStream(sourcePath), "UTF-8"));
                 Writer wordnetWriter= new OutputStreamWriter(new FileOutputStream(destFile), "UTF-8");
