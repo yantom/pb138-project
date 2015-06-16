@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="WN">
+    <xs:complexType>
+      <xs:sequence>
+         
+        <xs:element name="SYNSET" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" type="xs:string"/>
+
+              <xs:element name="POS">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="a"/>
+                    <xs:enumeration value="b"/>
+                    <xs:enumeration value="n"/>
+                    <xs:enumeration value="v"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+
+              <xs:element name="SYNONYM">
+                <xs:complexType>
+                  <xs:choice maxOccurs="unbounded">
+                    <xs:element name="LITERAL" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="sense" type="xs:integer"/> <!--sense number-->
+                            <xs:attribute name="lnote" type="xs:string"/> <!--literal note-->
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    
+                    <xs:element name="WORD" minOccurs="0" maxOccurs="unbounded"> <!--internal cache, literal words-->
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+
+                  </xs:choice>
+                </xs:complexType>
+              </xs:element>
+
+              <xs:element name="ILR" minOccurs="0" maxOccurs="unbounded"> <!--internal links-->
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="type" type="xs:string"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+
+              <xs:element name="ELR" minOccurs="0" maxOccurs="unbounded"> <!--external links-->
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="type" type="xs:string"/>
+                      <xs:attribute name="system" type="xs:string"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+
+              <xs:element name="DEF" type="xs:string" minOccurs="0"/> <!--synset definition-->
+
+              <xs:element name="USAGE" type="xs:string" minOccurs="0" maxOccurs="unbounded"/> <!--usage examples-->
+
+              <xs:element name="BCS" minOccurs="0"><!--Base Concept set-->
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="3"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+                  
+              <xs:element name="DOMAIN" type="xs:string" minOccurs="0"/> <!--synset domain-->
+
+              <xs:element name="SUMO" minOccurs="0" maxOccurs="unbounded"> <!--SUMO ontology link-->
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="type" type="xs:string"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              
+              <xs:element name="SNOTE" type="xs:string" minOccurs="0"/> <!--synset note-->
+
+              <xs:element name="STAMP" type="xs:string" minOccurs="0"/> <!--identify last user who edited the synset -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

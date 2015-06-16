@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<article xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Převod dat slovníku Wordnet do DEBVisDic XML formátu</title>
+        <author>
+            <personname>Ondřej Bulla</personname>
+            <affiliation>
+                <org>
+                    <orgname>Masarykova Univerzita</orgname>
+                    <orgdiv>Fakulta Informatiky</orgdiv>
+                </org>
+            </affiliation>
+        </author>
+    </info>
+    <sect1>
+        <title>Závěrečná zpráva</title>
+        <para>Zpráva obsahuje shrnutí problémů, se kterými se autor potkal během konverze arabského wordnetu do DEBVisDic formátu.</para>
+        <sect2>
+            <title>Nastudování formátu wordnetů, určení mapování</title>
+            <para>
+                Na začátku práce jsem se seznámil s formátem arabského wordnetu, DEBVisDic formátem (výstupní formát) a fungováním wordnetu jako celku, což mi objasnil vedoucí práce RNDr. Adam Rambousek, který mi také objasnil, jak mapovat vstupní formát na výstupní formát.
+            </para>
+        </sect2>
+        <sect2>
+            <title>Konverze dat</title> 
+            <para>
+                Pro vstupní formát jsem napsal XML Schema a pomocí něj jsem testoval, jeslti je vstupní soubor validní. Důležité pro mě byly uzly s názvem item (představující synset) a word (představující slovo).
+            </para>
+            <para>
+                Samotnou konverzi ze vstupního formátu na výstupní formát jsem použil XQuery. Pro každý synset si najdu všechna slova co do něj patří a uložím je ve výstupním formátu.
+            </para>
+            <para>
+                XML Schema jsem kontroloval pomocí SchemaValidatoru, který jsme v předmětu PB138 měli k dispozici při opravovaní druhé domácí úlohy. Tuto třídu jsem musel trochu upravit, aby odpovídala mým potřebám. Důležitá je metoda validate, kterou jsem změnil tak, aby měla návratový typ Boolean a vracela buď true (soubor je validní) nebo vyhodila výjimku s popisem chyby ve formátu.
+            </para>
+            <para>
+                XQuery provádím spuštěním externího programu z příkazové řádky. Tento program tedy musí být ve složce, ze které je zpouštěna aplikace. Jedná se o program saxon9he.jar, který byl také využit při jednom z domácích úkolů v předmětu PB138.
+            </para>
+        </sect2>
+        <sect2>
+            <title>Grafické uživatelské rozhraní</title> 
+            <para>
+                V ramci GUI jsem naprogramoval vše, kromě progres baru a převodu do swingWorkeru.
+            </para>
+        </sect2>
+    </sect1>
+</article>
