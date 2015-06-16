@@ -5,11 +5,9 @@
  */
 package pb138.wordnetconvert.gui;
 
-import java.io.FileFilter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-import javax.swing.UIManager;
 import pb138.wordnetconvert.backend.ArabicWordnetConverterImpl;
 import pb138.wordnetconvert.backend.Lang;
 import pb138.wordnetconvert.backend.SLWordnetConverterImpl;
@@ -53,7 +51,7 @@ public class MainForm extends javax.swing.JFrame {
             return true;
         }
         
-
+        @Override
         protected void done() {
             jProgressBar1.setIndeterminate(false);
             try{
